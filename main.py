@@ -16,7 +16,9 @@ def walk(path):
 		except OSError,e:
 			print e
 
-def frameByFrame(path, folder):
+def frameByFrame(path, folder, index):
+	print path
+	print folder
 	vc = cv2.VideoCapture(path) #读入视频文件
 	c=1
 	if vc.isOpened(): #判断是否正常打开
@@ -27,7 +29,7 @@ def frameByFrame(path, folder):
 	while rval:   #循环读取视频帧
 	    rval, frame = vc.read()
 	    if(c%timeF == 0): #每隔timeF帧进行存储操作
-	        cv2.imwrite('./image/' + folder + '/' +str(c) + '.jpg',frame) #存储为图像
+	        cv2.imwrite('./image/' + folder + '/' + str(index) + '&' +str(c) + '.jpg',frame) #存储为图像
 	    c = c + 1
 	vc.release()
 
@@ -42,5 +44,6 @@ for root, dir_, file in os.walk(VIDEO_PATH):
 	files.append(file)
 
 for i in range(6):
-	for file in files[i+1]:
-		frameByFrame(roots[i+1] + '/' + file, dirs[0][i])
+	for index, file in enumerate(files[i+1]):
+		print index
+		frameByFrame(roots[i+1] + '/' + file, dirs[0][i], index)
