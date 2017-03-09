@@ -37,7 +37,7 @@ walk(VIDEO_PATH) #递归删除.DS_Store
 
 roots = []#所有文件夹名
 dirs = []#视频文件
-files =[]#视频文件地址
+files = []#视频文件地址
 for root, dir_, file in os.walk(VIDEO_PATH):
 	roots.append(root)
 	dirs.append(dir_)
