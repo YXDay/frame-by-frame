@@ -88,4 +88,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# 工程相关
 .DS_Store
+image/

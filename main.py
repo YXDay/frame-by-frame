@@ -1,19 +1,46 @@
 #coding:utf-8
 import cv2
+import os
 
-vc = cv2.VideoCapture('/Users/daiyanxu/Desktop/project/GraduationDesign/imageweuse/fight/fightgl.mp4') #è¯»å…¥è§†é¢‘æ–‡ä»¶
-c=1
-if vc.isOpened(): #åˆ¤æ–­æ˜¯å¦æ­£å¸¸æ‰“å¼€
-    rval , frame = vc.read()
-else:
-    rval = False
+VIDEO_PATH = '/Users/daiyanxu/Desktop/project/GraduationDesign/imageweuse'
 
-timeF = 1  #è§†é¢‘å¸§è®¡æ•°é—´éš”é¢‘ç‡
+# µİ¹éÉ¾³ı.DS_Store
+def walk(path):
+	for item in os.listdir(path):
+		try:
+			if(item == ".DS_Store"):
+				os.remove(path+"/"+item)
+			else:
+				if(os.path.isdir(path+"/"+item)):
+					walk(path+"/"+item)
+		except OSError,e:
+			print e
 
-while rval:   #å¾ªç¯è¯»å–è§†é¢‘å¸§
-    rval, frame = vc.read()
-    if(c%timeF == 0): #æ¯éš”timeFå¸§è¿›è¡Œå­˜å‚¨æ“ä½œ
-        cv2.imwrite('./image/'+str(c) + '.jpg',frame) #å­˜å‚¨ä¸ºå›¾åƒ
-    c = c + 1
+def frameByFrame(path, folder):
+	vc = cv2.VideoCapture(path) #¶ÁÈëÊÓÆµÎÄ¼ş
+	c=1
+	if vc.isOpened(): #ÅĞ¶ÏÊÇ·ñÕı³£´ò¿ª
+	    rval , frame = vc.read()
+	else:
+	    rval = False
+	timeF = 1  #ÊÓÆµÖ¡¼ÆÊı¼ä¸ôÆµÂÊ
+	while rval:   #Ñ­»·¶ÁÈ¡ÊÓÆµÖ¡
+	    rval, frame = vc.read()
+	    if(c%timeF == 0): #Ã¿¸ôtimeFÖ¡½øĞĞ´æ´¢²Ù×÷
+	        cv2.imwrite('./image/' + folder + '/' +str(c) + '.jpg',frame) #´æ´¢ÎªÍ¼Ïñ
+	    c = c + 1
+	vc.release()
 
-vc.release()
+walk(VIDEO_PATH) #µİ¹éÉ¾³ı.DS_Store
+
+roots = []#ËùÓĞÎÄ¼ş¼ĞÃû
+dirs = []#ÊÓÆµÎÄ¼ş
+files =[]#ÊÓÆµÎÄ¼şµØÖ·
+for root, dir_, file in os.walk(VIDEO_PATH):
+	roots.append(root)
+	dirs.append(dir_)
+	files.append(file)
+
+for i in range(6):
+	for file in files[i+1]:
+		frameByFrame(roots[i+1] + '/' + file, dirs[0][i])
