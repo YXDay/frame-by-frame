@@ -91,3 +91,6 @@ ENV/
 # 工程相关
 .DS_Store
 image/
+.png
+cfg/
+data/
