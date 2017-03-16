@@ -36,3 +36,5 @@ for index, file in enumerate(files[1]):
 	order = '../../darknet/darknet detect ../../darknet/cfg/yolo.cfg ../../darknet/yolo.weights ' + roots[1] + '/' + file
 	os.system(order)
 	time.sleep(3)
+
+os.system('say mission complete')
