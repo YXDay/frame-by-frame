@@ -29,7 +29,7 @@ def frameByFrame(path, folder, index):
 	while rval:   #Ñ­»·¶ÁÈ¡ÊÓÆµÖ¡
 	    rval, frame = vc.read()
 	    if(c%timeF == 0): #Ã¿¸ôtimeFÖ¡½øÐÐ´æ´¢²Ù×÷
-	        cv2.imwrite('./image/' + folder + '/' + str(index) + '&' +str(c) + '.jpg',frame) #´æ´¢ÎªÍ¼Ïñ
+	        cv2.imwrite('./image/' + folder + '/' + str(index) + 'a' +str(c) + '.jpg',frame) #´æ´¢ÎªÍ¼Ïñ
 	    c = c + 1
 	vc.release()
 
