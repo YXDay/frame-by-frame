@@ -32,9 +32,9 @@ for root, dir_, file in os.walk(IMAGE_PATH):
 
 
 # 写入
-for index, file in enumerate(files[1]):
-	order = '../../darknet/darknet detect ../../darknet/cfg/yolo.cfg ../../darknet/yolo.weights ' + roots[1] + '/' + file
+for index, file in enumerate(files[6]):
+	order = '../../darknet/darknet detect ../../darknet/cfg/yolo.cfg ../../darknet/yolo.weights ' + roots[6] + '/' + file
 	os.system(order)
-	time.sleep(3)
+	time.sleep(0.1)
 
 os.system('say mission complete')
